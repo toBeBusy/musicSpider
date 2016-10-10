@@ -14,6 +14,7 @@ import spider.entity.ChartsEntity;
 import spider.entity.ExcleEntity;
 import spider.entity.SongEntity;
 
+
 /**
  * 
  * @author Administrator
@@ -77,7 +78,7 @@ public class ExcleProduceService {
 		for (Artist artist : artists) {
 			sb.append(artist.getName() + ";");
 		}
-		return sb.toString().substring(0, sb.length()-2);
+		return sb.toString().substring(0, sb.length()-1);
 	}
 
 	/**
