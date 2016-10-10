@@ -1,9 +1,5 @@
 package spider.service;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,7 +13,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import spider.Util.HttpUtils;
+import spider.Util.JsonUtil;
 import spider.entity.ChartsEntity;
 import spider.entity.SongEntity;
 
@@ -52,6 +48,8 @@ public class SpiderService {
 				ChartsEntity entity = new  ChartsEntity();
 				entity.setUrl("http://music.163.com" + element.attr("href"));
 				entity.setChartsName(element.html());
+				//爬取排行榜歌曲信息
+				this.songSpider(entity);
 				chartsEntityList.add(entity);
 			}
 		}
@@ -98,99 +96,27 @@ public class SpiderService {
 	 */
 	public ChartsEntity songSpider(ChartsEntity chartsEntity){
 		//获取链接
-		Connection connection = Jsoup.connect("http://music.163.com/playlist?id=479363354");
+		Connection connection = Jsoup.connect(chartsEntity.getUrl());
 		this.paramSeter(connection);
-		String s = null;
-		try {
-			s = HttpUtils.getAjaxCotnent("http://music.163.com/playlist?id=479363354");
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		Document document = null;
 
-
-		
 		//上榜歌曲List
 		List<SongEntity> songList = new ArrayList<SongEntity>();
 		try {
 			//获取页面全部元素
 			document = connection.get();
-			document = Jsoup.parse(s);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		if(null != document){
-			//获取排行榜tbody
-			Element tabElement =  document.getElementById("song-list-pre-cache");
-
-			Elements test = document.select(".m-table m-table-rank");
-			
-			//			Elements test = tabElement.getElementsByTag("table");
-			
-			this.test(document);
-			
-			Element tableElement = document.getElementsByTag("table").get(0).
-					getElementsByTag("tbody").get(0);
-			//获取歌曲列表
-			Elements elements = tableElement.getElementsByTag("tr");
-			Iterator<Element> it = elements.iterator();
-			while (it.hasNext()) {
-				Element songElement = it.next();
-				SongEntity entity = this.getSong(songElement);
-				songList.add(entity);
-			}
+			//获取歌曲信息
+			Element textareaElement = document.getElementsByTag("textarea").get(0);
+			songList = JsonUtil.getObject(textareaElement.html());
 		}
 		
 		//设置返回值
 		chartsEntity.setSongList(songList);
 		return chartsEntity;
-		
-	}
-	
-	/**
-	 * 从标签中提取歌曲信息;   烦。。。。
-	 * @param args
-	 */
-	public SongEntity getSong(Element element){
-		SongEntity entity = new SongEntity();
-		//获取所有单元格
-		Elements tdElements = element.getElementsByTag("td");
-		
-		//tdElements.get(0)第一个单元格。
-		String numStr = tdElements.get(0).getElementsByTag("span").get(0).html();
-		entity.setNum(Integer.valueOf(numStr));
-		
-		//tdElements.get(1)第二个单元格。
-		String name = tdElements.get(1).getElementsByTag("b").get(0).html();
-		entity.setName(name);
-		
-		//tdElements.get(2)第三个单元格。
-		String time = tdElements.get(2).getElementsByTag("span").get(0).html();
-		entity.setTime(time);
-		
-		//tdElements.get(3)第四个单元格。
-		String singer = tdElements.get(3).getElementsByTag("a").get(0).html();
-		entity.setSinger(singer);
-		
-		return entity;
-	}
-	
-	
-	
-	private void test(Document document){
-		File file = new File("D://test.html");
-		
-		try {
-			FileOutputStream fi = new FileOutputStream(file);
-			BufferedOutputStream bf = new BufferedOutputStream(fi);
-			bf.write(document.toString().getBytes());
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	public static void main(String[] args) {
