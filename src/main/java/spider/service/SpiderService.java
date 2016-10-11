@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,12 +21,27 @@ import spider.entity.SongEntity;
 
 public class SpiderService {
 	
-	private static final String chartsUrl = "http://music.163.com/discover/toplist/";
+	private String chartsUrl;
 	
+	Log logger = LogFactory.getLog(ThreadService.class);
+	
+	/**
+	 * @return the chartsUrl
+	 */
+	public void setChartsUrl(String chartsUrl) {
+		this.chartsUrl = chartsUrl;
+	}
+
 	/**
 	 * 爬取排行榜实体类
 	 */
 	public List<ChartsEntity> ChartsSpider(){
+		logger.warn("............................");
+		logger.warn("............................");
+		logger.warn("............................");
+		logger.warn("............................");
+		logger.warn("............................");
+		logger.warn("............................");
 		//爬取结果
 		List<ChartsEntity> chartsEntityList = new ArrayList<ChartsEntity>();
 		//获取链接

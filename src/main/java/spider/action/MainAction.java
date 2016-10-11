@@ -2,15 +2,18 @@ package spider.action;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
 import spider.entity.ChartsEntity;
 import spider.service.ExcleProduceService;
 import spider.service.SpiderService;
 
 public class MainAction {
 	
-	private ExcleProduceService excleProduceService = new ExcleProduceService();
+	private ExcleProduceService excleProduceService;
 	
-	private SpiderService spiderService = new SpiderService();
+	private SpiderService spiderService;
 
 	/**
 	 * @param excleProduceService the excleProduceService to set
@@ -32,6 +35,8 @@ public class MainAction {
 	}
 	
 	public static void main(String[] args) {
-		new MainAction().spider();
+		ApplicationContext ac = new FileSystemXmlApplicationContext("src/main/resources/spring.xml");
+		MainAction mainAction = (MainAction) ac.getBean("mainAction");
+		mainAction.spider();
 	}
 }
