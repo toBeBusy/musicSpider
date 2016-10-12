@@ -1,18 +1,24 @@
 package spider.service;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 public class ThreadService {
 	
-	ExecutorService executorService;
+	ThreadPoolTaskExecutor executor;
 	
 	Log logger = LogFactory.getLog(ThreadService.class);
+	
 
-	public void test(){
-		ExecutorService executorService = Executors.newCachedThreadPool();
+	/**
+	 * @param executor the executor to set
+	 */
+	public void setExecutor(ThreadPoolTaskExecutor executor) {
+		this.executor = executor;
+	}
+
+	public void doTask(Runnable runnable){
+		executor.execute(runnable, 10000);
 	}
 }

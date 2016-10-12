@@ -10,6 +10,11 @@
 	<bean id="spiderService" class="spider.service.SpiderService"
 		scope="singleton">
 		<property name="chartsUrl" value="http://music.163.com/discover/toplist/"></property>
+		<property name="threadService" ref="threadService"></property>
+	</bean>
+	
+	<bean id="threadService" class="spider.service.ThreadService" scope="singleton">
+		<property name="executor" ref="taskExecutor"></property>
 	</bean>
 
 	<bean id="mainAction" class="spider.action.MainAction">
