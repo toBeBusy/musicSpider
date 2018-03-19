@@ -17,8 +17,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import spider.Util.JsonUtil;
-import spider.entity.ChartsEntity;
-import spider.entity.SongEntity;
+import spider.model.entity.ChartsEntity;
+import spider.model.entity.SongEntity;
 
 public class SpiderService {
 	

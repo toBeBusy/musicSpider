@@ -9,10 +9,10 @@ import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import spider.entity.Artist;
-import spider.entity.ChartsEntity;
-import spider.entity.ExcleEntity;
-import spider.entity.SongEntity;
+import spider.model.entity.Artist;
+import spider.model.entity.ChartsEntity;
+import spider.model.entity.ExcleEntity;
+import spider.model.entity.SongEntity;
 
 
 /**
@@ -25,7 +25,7 @@ public class ExcleProduceService {
 	/**
 	 * excle地址
 	 */
-	private String url = "d:/网易云音乐排行榜.xls";
+	private String url = "/home/qiupeng1990/网易云音乐排行榜.xls";
 
 	/**
 	 * 创建excle的方法。

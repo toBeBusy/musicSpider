@@ -1,4 +1,4 @@
-package spider.entity;
+package spider.model.entity;
 
 public class Artist {
 	

@@ -2,10 +2,7 @@ package spider.action;
 
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-
-import spider.entity.ChartsEntity;
+import spider.model.entity.ChartsEntity;
 import spider.service.ExcleProduceService;
 import spider.service.SpiderService;
 
@@ -34,9 +31,9 @@ public class MainAction {
 		 excleProduceService.createRegularSheet(chartsList);
 	}
 	
-	public static void main(String[] args) {
-		ApplicationContext ac = new FileSystemXmlApplicationContext("src/main/resources/spring.xml");
-		MainAction mainAction = (MainAction) ac.getBean("mainAction");
-		mainAction.spider();
-	}
+//	public static void main(String[] args) {
+//		ApplicationContext ac = new FileSystemXmlApplicationContext("src/main/resources/spring.xml");
+//		MainAction mainAction = (MainAction) ac.getBean("mainAction");
+//		mainAction.spider();
+//	}
 }

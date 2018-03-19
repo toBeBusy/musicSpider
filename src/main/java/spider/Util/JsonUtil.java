@@ -2,7 +2,7 @@ package spider.Util;
 
 import java.util.List;
 
-import spider.entity.SongEntity;
+import spider.model.entity.SongEntity;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
