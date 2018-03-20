@@ -5,13 +5,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 
+import java.io.File;
 import java.util.Arrays;
 
 @SpringBootApplication
 public class WebApplication {
 
     public static void main(String[] args) {
+        ClassPathResource classPathResource = new ClassPathResource("mybatis_config.xml");
+        System.out.println(classPathResource.exists());
         SpringApplication.run(WebApplication.class, args);
     }
 
