@@ -35,7 +35,7 @@ public class DatasourceConfig {
 	@Value("${mybatis.mapper-locations}")
 	private String mybatisMapper;
 	
-	@Bean(name = "dataSource")
+	@Bean(name = "dataSource",destroyMethod = "close")
 	@Primary
 	@ConfigurationProperties(prefix = "c3p0")
 	public DataSource dataSource(){

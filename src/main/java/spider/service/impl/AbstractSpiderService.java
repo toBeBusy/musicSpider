@@ -24,7 +24,7 @@ import spider.service.SpiderService;
 
 public abstract class AbstractSpiderService implements SpiderService {
 	
-	private String chartsUrl = "http://music.163.com";
+	private String chartsUrl = "http://music.163.com/discover/toplist/";
 
 	private static Log logger = LogFactory.getLog(ThreadService.class);
 

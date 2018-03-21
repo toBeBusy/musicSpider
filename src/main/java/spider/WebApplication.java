@@ -14,8 +14,6 @@ import java.util.Arrays;
 public class WebApplication {
 
     public static void main(String[] args) {
-        ClassPathResource classPathResource = new ClassPathResource("mybatis_config.xml");
-        System.out.println(classPathResource.exists());
         SpringApplication.run(WebApplication.class, args);
     }
 

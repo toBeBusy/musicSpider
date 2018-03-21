@@ -19,11 +19,11 @@
 	</select>
 	<insert id="batchInsert" parameterType="spider.model.po.SongRangePo" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
-		SONG_RANKING(sort,song_name,song_time,singer,ranking)
+		song_ranking(sort,song_name,song_time,singer,ranking)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
 			(
-			#{item.sort},
+			#{index} + 1,
 			#{item.songName},
 			#{item.songTime},
 			#{item.singer},
