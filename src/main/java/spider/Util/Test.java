@@ -11,6 +11,6 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        List<Integer> test = new Test().getType("");
+//        List<Integer> test = new Test().getType("");
     }
 }
